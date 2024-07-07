@@ -1,6 +1,6 @@
 # Azure IoT with MXCHIP embedded device
 
-This is an [IoT DevKit](https://github.com/ericbrunner/AzureIoT/blob/main/Azure%20IoT%20MXCHIP.pdf) PoC project to explore 
+This is an [IoT DevKit](https://github.com/ericbrunner/Azure-IoT/blob/main/Azure%20IoT%20MXCHIP.pdf) PoC project to explore 
 
 - Azure IoT Hub
 - Azure Functions
