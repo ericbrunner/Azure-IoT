@@ -1,0 +1,135 @@
+﻿<Window x:Class="Zone.IoT.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zone.IoT.App"
+        xmlns:iot="clr-namespace:Zone.IoT.WpfUserControlLibrary;assembly=Zone.IoT.WpfUserControlLibrary"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <iot:IotDashboard Grid.Row="0"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+            <Button Content="Throw" Click="ButtonBase_OnClick"/>
+            <Button Content="Catch"/>
+        </StackPanel>
+    </Grid>
+
+
+    <!--<Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Eric's IoT Devkit - Azure AZ3166"
+               FontSize="35" Foreground="White" Background="Crimson" />
+
+
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Content="{Binding Temperature}"
+               FontSize="35"
+               Foreground="Green"
+               Background="CornflowerBlue" />
+
+        <Label Grid.Row="1"
+               Grid.Column="1"
+               Content="{Binding Humidity}"
+               FontSize="35"
+               Foreground="White"
+               Background="#FF391AC5" />
+
+        <CheckBox Grid.Row="2"
+                  Grid.Column="0"
+                  Margin="79,12"
+                  Content="Relay schalten"
+                  Command="{Binding RelayTriggerCommand}"
+                  CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"
+                  FontSize="32"
+                  FontWeight="Bold"
+                  VerticalContentAlignment="Center"
+                  HorizontalContentAlignment="Center"
+                  Foreground="Blue" />
+
+        <Slider x:Name="Slider"
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="36,29,130,12"
+                Value="20"
+                Minimum="10"
+                Maximum="50"
+                ValueChanged="Slider_OnValueChanged" />
+        <Label Content="{Binding ElementName=Slider, Path=Value, UpdateSourceTrigger=PropertyChanged}"
+               Grid.Column="1"
+               Margin="277,29,10,12"
+               Grid.Row="2" />
+
+        <Label Grid.Row="3" 
+               Grid.Column="0"
+               Foreground="Crimson"
+               FontSize="30"
+               Content="{Binding TemperatureAlert}"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"/>
+
+        <Label Grid.Row="3" 
+               Grid.Column="1"
+               FontSize="30"
+               Content="{Binding ButtonApressed}"
+               Foreground="{Binding ButtonAColor}"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"/>
+
+        <StackPanel Grid.Row="4" 
+                    Grid.Column="0"
+                    Orientation="Horizontal"
+                    Margin="10">
+            <Label Content="Interval: " FontSize="20" Margin="10" Padding="1"/>
+            <TextBox Text="10000" 
+                     FontSize="20" 
+                     Margin="10" 
+                     MinWidth="100"  
+                     MaxWidth="200" 
+                     Width="auto"
+                     TextChanged="TextBoxBase_OnTextChanged"/>
+        </StackPanel>
+        <Label Grid.Row="4" 
+               Grid.Column="1" 
+               Content="{Binding ReportedInterval}"
+               Foreground="DarkGreen"
+               Background="CornflowerBlue"
+               FontSize="35"/>
+
+        <Button Grid.Row="5"
+                Grid.Column="0"
+                Content="Send to IoT Device"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="35"
+                Foreground="White"
+                Background="#FF391AC5"
+                Command="{Binding SetDevkitDataCommand}" />
+        <Label Grid.Row="5" 
+               Grid.Column="1"
+               Background="#FF391AC5"
+               Content="{Binding SendStatus}"
+               FontSize="15"
+               VerticalContentAlignment="Center"
+               HorizontalContentAlignment="Center"
+               Foreground="Aqua"/>
+    </Grid>-->
+</Window>

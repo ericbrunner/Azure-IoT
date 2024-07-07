@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="IoTShellApp.Views.DevicePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:progressBar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+    xmlns:viewmodels="clr-namespace:IoTShellApp.ViewModels"
+    BackgroundColor="{StaticResource AppDarkBlue}"
+    mc:Ignorable="d">
+    <ContentPage.BindingContext>
+        <viewmodels:DeviceViewModel />
+    </ContentPage.BindingContext>
+    <Shell.TitleView>
+        <StackLayout>
+            <Label
+                FontSize="Large"
+                HorizontalTextAlignment="Center"
+                Text="Devkit IoT"
+                TextColor="{StaticResource AppBlue}"
+                VerticalTextAlignment="Center" />
+
+            <Label
+                FontSize="Small"
+                FormattedText="{Binding IsOnlineFormatted}"
+                HorizontalTextAlignment="Center"
+                TextColor="{StaticResource AppBlue}"
+                VerticalTextAlignment="Center" />
+        </StackLayout>
+    </Shell.TitleView>
+
+    <ScrollView>
+        <Grid BackgroundColor="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Frame
+                Grid.Row="0"
+                Margin="3"
+                BackgroundColor="#16AAAAAA"
+                CornerRadius="3"
+                HasShadow="True">
+                <StackLayout>
+                    <Label Text="{Binding MessageId, StringFormat=' Messge ID: {0}'}" TextColor="White" />
+                    <Label Text="{Binding IoTHubEnqueueTime, StringFormat='Timestamp: {0:dd.MM.yyyy HH:mm:ss}'}" TextColor="White" />
+                </StackLayout>
+            </Frame>
+
+            <Frame
+                Grid.Row="1"
+                Margin="3"
+                BackgroundColor="#16AAAAAA"
+                CornerRadius="3"
+                HasShadow="True">
+                <StackLayout Orientation="Horizontal">
+                    <Label
+                        HorizontalOptions="StartAndExpand"
+                        Text="{Binding Pressure, StringFormat=' {0:N} mBar'}"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+                    <Label
+                        HorizontalOptions="EndAndExpand"
+                        Text="{Binding Pressure, StringFormat=' {0:N} hPa'}"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+                </StackLayout>
+            </Frame>
+
+            <Frame
+                Grid.Row="2"
+                Margin="3"
+                BackgroundColor="#16AAAAAA"
+                CornerRadius="3"
+                HasShadow="True">
+                <StackLayout Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="{Binding Temperature}"
+                            TextColor="{Binding TemperatureColor}"
+                            VerticalOptions="Center" />
+                        <Label
+                            HorizontalOptions="EndAndExpand"
+                            Text="{Binding Humidity, StringFormat='Humidity {0}'}"
+                            TextColor="White"
+                            VerticalOptions="Center" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="{Binding TemperatureAlert}"
+                            TextColor="{Binding TemperatureAlertColor}" />
+                        <Label
+                            HorizontalOptions="EndAndExpand"
+                            Text="{Binding ButtonApressed}"
+                            TextColor="{Binding ButtonApressedColor}" />
+                    </StackLayout>
+                </StackLayout>
+
+            </Frame>
+
+            <Frame
+                Grid.Row="3"
+                Margin="3"
+                BackgroundColor="#16AAAAAA"
+                CornerRadius="3"
+                HasShadow="True">
+                <StackLayout Orientation="Vertical">
+
+                    <StackLayout Orientation="Horizontal">
+
+                        <Label
+                            HorizontalOptions="Start"
+                            Text="Interval (msec):"
+                            TextColor="White"
+                            VerticalTextAlignment="Center" />
+                        <Entry
+                            x:Name="Interval"
+                            HorizontalOptions="EndAndExpand"
+                            Keyboard="Numeric"
+                            Text="{Binding Interval, Mode=TwoWay, Converter={StaticResource NullableIntConverter}}"
+                            TextColor="Aqua"
+                            WidthRequest="100" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                            HorizontalOptions="Start"
+                            Text="Reported Interval(ACK):"
+                            TextColor="White" />
+                        <Label
+                            HorizontalOptions="End"
+                            Text="{Binding ReportedInterval, Converter={StaticResource NullableIntConverter}}"
+                            TextColor="White" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+
+                        <Label
+                            HorizontalOptions="Start"
+                            Text="LED:"
+                            TextColor="White" />
+                        <Switch
+                            x:Name="TriggerRelaySwitch"
+                            HorizontalOptions="End"
+                            IsToggled="{Binding TriggerRelay, Mode=TwoWay}"
+                            OnColor="LightBlue"
+                            ThumbColor="Aquamarine" />
+                    </StackLayout>
+
+
+                    <Label
+                        HorizontalOptions="Center"
+                        Text="{Binding DeviceShaked}"
+                        TextColor="{Binding DeviceShakedColor}" />
+
+                    <Label
+                        HorizontalOptions="Center"
+                        Text="Fan threshold"
+                        TextColor="White" />
+                    <Slider
+                        HorizontalOptions="Fill"
+                        Maximum="50"
+                        MaximumTrackColor="White"
+                        Minimum="10"
+                        MinimumTrackColor="{StaticResource AppBlue}"
+                        ThumbColor="Aquamarine"
+                        Value="{Binding TemperatureThreshold}" />
+
+                    <Label
+                        HorizontalOptions="Center"
+                        Text="{Binding TemperatureThresholdText}"
+                        TextColor="{StaticResource AppBlue}" />
+
+                    <Button
+                        BackgroundColor="{StaticResource AppBlue}"
+                        Command="{Binding SetDevkitDataCommand}"
+                        FontSize="Large"
+                        HorizontalOptions="Center"
+                        Text="Set"
+                        TextColor="White" />
+
+                </StackLayout>
+            </Frame>
+
+            <Frame
+                Grid.Row="4"
+                Margin="3"
+                BackgroundColor="#16AAAAAA"
+                CornerRadius="3"
+                HasShadow="True"
+                IsVisible="{Binding IsErrorMessage}">
+                <Label Text="{Binding ErrorMessage}" TextColor="White" />
+            </Frame>
+
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

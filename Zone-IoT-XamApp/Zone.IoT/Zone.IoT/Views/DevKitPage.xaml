@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Zone.IoT.Views.DevKitPage"
+             xmlns:vm="clr-namespace:Zone.IoT.ViewModels"
+             xmlns:converter="clr-namespace:Zone.IoT.Converter">
+    <ContentPage.BindingContext>
+        <vm:DevKitPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:NullableIntConverter x:Key="NullableIntConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackLayout Grid.Row="0" Orientation="Horizontal">
+            <Label Text="{Binding Pressure, StringFormat=' {0:N} mBar'}" 
+                   FontSize="20"
+                   
+                   TextColor="Blue"
+                   HorizontalOptions="StartAndExpand"
+                   VerticalOptions="Center"
+                   />
+            <Label Text="{Binding Pressure, StringFormat=' {0:N} hPa'}" 
+                   FontSize="20"
+                   TextColor="Blue"
+                   HorizontalOptions="EndAndExpand"
+                   VerticalOptions="Center"
+                   />
+        </StackLayout>
+        <StackLayout Grid.Row="1" Orientation="Horizontal">
+            <Label Text="{Binding Temperature}"
+                   HorizontalOptions="StartAndExpand"
+                   VerticalOptions="Center"
+                   TextColor="{Binding TemperatureColor}"
+                   FontSize="20" />
+            <Label Text="{Binding Humidity}"
+                   HorizontalOptions="EndAndExpand"
+                   VerticalOptions="Center"
+                   TextColor="Indigo"
+                   FontSize="20" />
+        </StackLayout>
+        <StackLayout Grid.Row="2" Orientation="Horizontal">
+
+            <Label Text="{Binding TemperatureAlert}" 
+                       TextColor="{Binding TemperatureAlertColor}" 
+                       HorizontalOptions="StartAndExpand"
+                       FontSize="Medium"/>
+                <Label Text="{Binding ButtonApressed}" 
+                       TextColor="{Binding ButtonApressedColor}" 
+                       HorizontalOptions="EndAndExpand"
+                       FontSize="Medium"/>
+         </StackLayout>
+        <StackLayout Grid.Row="3" Orientation="Vertical" BackgroundColor="LightBlue">
+
+            <StackLayout Orientation="Horizontal">
+
+                <Label Text="Interval (msec.):" 
+                       HorizontalOptions="EndAndExpand"/>
+                <Entry x:Name="Interval"
+                       Text="{Binding Interval, Mode=TwoWay, Converter={StaticResource NullableIntConverter}}"
+                       Placeholder="Devkit Interval"
+                       Keyboard="Numeric"
+                       HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Reported Interval (Acknowledged):" 
+                       HorizontalOptions="End"/>
+                <Label Text="{Binding ReportedInterval, Converter={StaticResource NullableIntConverter}}" 
+                       TextColor="Green" 
+                       HorizontalOptions="End"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+
+                <Label Text="Relay:" 
+                       HorizontalOptions="EndAndExpand"/>
+                <Switch x:Name="TriggerRelaySwitch"
+                        IsToggled="{Binding TriggerRelay, Mode=TwoWay}" 
+                        HorizontalOptions="End"/>
+            </StackLayout>
+
+
+            <Label HorizontalOptions="Center"
+                   Text="Fan threshold"
+                   TextColor="DarkSlateBlue"
+                   FontSize="Medium" />
+            <Slider HorizontalOptions="Fill"
+                    Margin="20,0"
+                    Maximum="50"
+                    Minimum="10"
+                    MaximumTrackColor="Red"
+                    MinimumTrackColor="Blue"
+                    ThumbColor="DarkSlateBlue"
+                    Value="{Binding TemperatureThreshold}" />
+            <Label HorizontalOptions="Center"
+                   Text="{Binding TemperatureThresholdText}"
+                   TextColor="DarkSlateBlue"
+                   FontSize="Medium" />
+            
+            <Button HorizontalOptions="Fill"
+                    Text="Set"
+                    BackgroundColor="DarkSlateBlue"
+                    TextColor="White"
+                    FontSize="Large"
+                    Command="{Binding SetDevkitDataCommand}"
+                    />
+
+        </StackLayout>
+    </Grid>
+</ContentPage>

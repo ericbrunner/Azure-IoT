@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converter="clr-namespace:Zone.IoT.Converter"
+             mc:Ignorable="d"
+             x:Class="IoTShellApp.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--Original Remoted App Colors -->
+            <Color x:Key="AppGrey">#577591</Color>
+            <Color x:Key="AppLightBlue">#9CB5CC</Color>
+            <Color x:Key="AppDarkBlue">#0F2336</Color>
+            <Color x:Key="AppBlue">#00A9FF</Color>
+            <Color x:Key="AppRed">Red</Color>
+
+            <Style x:Key="FfimageLandingStyle" TargetType="View">
+                <Setter Property="WidthRequest" Value="160" />
+            </Style>
+
+            <Style x:Key="BaseButton" TargetType="Button">
+                <Setter Property="HeightRequest" Value="45" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+
+            <Style x:Key="FilledButton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="{StaticResource AppBlue}" />
+                <Setter Property="CornerRadius" Value="0" />
+            </Style>
+
+            <Style x:Key="ActionMenuButton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+                <Setter Property="BackgroundColor" Value="{StaticResource AppDarkBlue}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+            </Style>
+
+            <Style x:Key="MoreButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource AppDarkBlue}" />
+                <Setter Property="TextColor" Value="{StaticResource AppLightBlue}" />
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="BorderButton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+                <Setter Property="TextColor" Value="{StaticResource AppBlue}" />
+                <Setter Property="BorderColor" Value="{StaticResource AppBlue}" />
+                <Setter Property="BorderWidth" Value="1" />
+                <Setter Property="CornerRadius" Value="0" />
+            </Style>
+
+
+            <Style x:Key="TabbedPage" TargetType="TabbedPage">
+                <Setter Property="BackgroundColor" Value="{StaticResource AppDarkBlue}" />
+            </Style>
+
+            <Style x:Key="ContentPageBase" TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{StaticResource AppDarkBlue}" />
+            </Style>
+
+            <Style x:Key="ContentViewBase" TargetType="ContentView">
+                <Setter Property="BackgroundColor" Value="{StaticResource AppDarkBlue}" />
+            </Style>
+
+            <Style x:Key="ComputersPageLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="LineBreakMode" Value="WordWrap" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
+
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
+                <On Platform="Android" Value="OpenSans-Regular.ttf#Open Sans" />
+                <On Platform="iOS" Value="OpenSans-Regular" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="SemiBoldFont">
+                <On Platform="Android" Value="OpenSans-Semibold.ttf#Open Sans" />
+                <On Platform="iOS" Value="OpenSans-Semibold" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+                <On Platform="Android" Value="OpenSans-Bold.ttf#Open Sans" />
+                <On Platform="iOS" Value="OpenSans-Bold" />
+            </OnPlatform>
+
+            
+            <converter:NullableIntConverter x:Key="NullableIntConverter"/>
+        </ResourceDictionary>
+        
+    </Application.Resources>
+</Application>

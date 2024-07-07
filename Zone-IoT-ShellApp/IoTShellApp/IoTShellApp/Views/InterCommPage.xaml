@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="IoTShellApp.Views.InterCommPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:IoTShellApp.ViewModels;assembly=IoTShellApp"
+    xmlns:models="clr-namespace:IoTShellApp.Models;assembly=IoTShellApp"
+    x:DataType="viewModels:IntercommViewModel"
+    BackgroundColor="{StaticResource AppDarkBlue}"
+    mc:Ignorable="d">
+    <Grid ColumnSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackLayout Grid.Row="0"
+                     Grid.ColumnSpan="2"
+                     Orientation="Horizontal"
+                     HorizontalOptions="FillAndExpand">
+            <Button Text="Connect"
+                    BackgroundColor="{StaticResource AppDarkBlue}"
+                    BorderColor="{StaticResource AppBlue}" BorderWidth="1"
+                    TextColor="{StaticResource AppLightBlue}"
+                    Clicked="ConnectButtonClicked"
+                    IsEnabled="{Binding IsDisconnected}" 
+                    HorizontalOptions="StartAndExpand"/>
+            <Button Text="Disconnect"
+                    BackgroundColor="{StaticResource AppDarkBlue}" BorderWidth="1"
+                    BorderColor="{StaticResource AppBlue}"
+                    TextColor="{StaticResource AppLightBlue}"
+                    Clicked="DisconnectButtonClicked"
+                    IsEnabled="{Binding IsConnected}" 
+                    HorizontalOptions="EndAndExpand"/>
+        </StackLayout>
+
+        <ListView Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0"
+                  ItemsSource="{Binding Messages}"
+                  VerticalOptions="FillAndExpand" 
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:ChatMessage">
+                    <TextCell Text="{Binding Message}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackLayout Grid.Row="2"
+                     Grid.ColumnSpan="2" Grid.Column="0"
+                     BackgroundColor="White"
+                     Orientation="Horizontal"
+                     HorizontalOptions="FillAndExpand"
+                     Padding="8,4">
+            <Entry HorizontalOptions="FillAndExpand"
+                   VerticalOptions="Center"
+                   Text="{Binding ChatMessage.Message}"
+                   Placeholder="Write a message"
+
+                   ReturnType="Send"
+                   ReturnCommand="{Binding SendMessageCommand}" />
+            <ImageButton Margin="0,0,5,0"
+                         CornerRadius="17"
+                         WidthRequest="34"
+                         HeightRequest="35"
+                         Padding="6"
+                         IsEnabled="{Binding IsConnected,Mode=OneWay}"
+                         Command="{Binding SendMessageCommand}"
+                         
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center" />
+        </StackLayout>
+    </Grid>
+</ContentPage>

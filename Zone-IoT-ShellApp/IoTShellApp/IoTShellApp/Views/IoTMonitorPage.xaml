@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="IoTShellApp.Views.IoTMonitorPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:Zone.IoT.Models"
+    xmlns:viewmodels="clr-namespace:IoTShellApp.ViewModels"
+    x:DataType="viewmodels:IoTMonitorViewModel"
+    BackgroundColor="{StaticResource AppDarkBlue}"
+    mc:Ignorable="d">
+    <Shell.TitleView>
+        <Label
+            FontSize="Large"
+            HorizontalTextAlignment="Center"
+            Text="Devkit IoT Monitor"
+            TextColor="{StaticResource AppBlue}"
+            VerticalTextAlignment="Center" />
+    </Shell.TitleView>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <Button
+                Grid.Row="1"
+                BackgroundColor="{StaticResource AppDarkBlue}"
+                BorderColor="{StaticResource AppBlue}"
+                BorderWidth="1"
+                Command="{Binding ClearCommand}"
+                HorizontalOptions="FillAndExpand"
+                Text="Clear"
+                TextColor="{StaticResource AppLightBlue}" />
+            <ListView
+                x:Name="ListView"
+                Grid.Row="0"
+                CachingStrategy="RecycleElementAndDataTemplate"
+                HasUnevenRows="True"
+                HorizontalScrollBarVisibility="Default"
+                ItemsSource="{Binding DevkitData}"
+                SeparatorColor="White"
+                VerticalOptions="FillAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:DevkitData">
+                        <ViewCell>
+                            <StackLayout>
+
+                                <Label Text="{Binding MessageId, StringFormat=' Messge ID: {0}'}" TextColor="{StaticResource AppLightBlue}" />
+                                <Label Text="{Binding IoTHubEnqueueTime, StringFormat='Timestamp: {0:dd.MM.yyyy HH:mm:ss}'}" TextColor="{StaticResource AppLightBlue}" />
+
+                                <Label Text="{Binding Pressure, StringFormat=' {0:N} mBar'}" TextColor="{StaticResource AppLightBlue}" />
+
+                                <Label Text="{Binding Temperature}" TextColor="{StaticResource AppLightBlue}" />
+                                <Label Text="{Binding Humidity, StringFormat='Humidity {0}'}" TextColor="{StaticResource AppLightBlue}" />
+
+
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
